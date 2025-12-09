@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEATRO SIN FRONTERAS 2026</title>
+    <link rel="icon" type="image/png" href="images/favicon4.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            overflow: auto;
+        }
+
+        .slide-container.active {
+            display: block;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ===== SLIDE 1 ===== */
+        .slide-1 {
+            background: linear-gradient(to right, #0091DA 0%, #00A8E8 100%);
+            color: white;
+            padding: 0 !important;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+
+        .slide-1-left {
+            flex: 0 0 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .curtain-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slide-1-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px 40px;
+        }
+
+        .slide-1-center h1 {
+            font-size: 60px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        .slide-1-center .subtitle {
+            font-size: clamp(32px, 5vw, 42px); /* ← автоматически масштабируется */
+            font-weight: 300;
+            margin-bottom: 40px;
+            font-style: italic;
+            max-width: 600px;
+        }
+
+        .slide-1-center .festival-info {
+            font-size: clamp(20px, 3vw, 28px); /* ← автоматически масштабируется */
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .slide-1-center .tagline {
+            font-size: clamp(24px, 4vw, 32px); /* ← автоматически масштабируется */
+            font-style: italic;
+            margin-top: 35px;
+            opacity: 0.95;
+        }
+
+        .slide-1-right {
+            flex: 0 0 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-circle {
+            width: 90%;
+            height: 90%;
+            max-width: 500px;
+            max-height: 500px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+        }
+
+        /* ===== SLIDES WITH IMAGE ===== */
+        .slide-with-image {
+            display: flex;
+            align-items: stretch;
+            padding: 0 !important;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide-with-image.text-left {
+            flex-direction: row;
+        }
+
+        .slide-with-image.text-right {
+            flex-direction: row-reverse;
+        }
+
+        .slide-content {
+            flex: 1;
+            padding: 4vh 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .slide-image-half {
+            flex: 1;
+            height: 100vh;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-image-half.empty {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BEE3F8 100%);
+            color: #0369A1;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* ===== SLIDE 9 ===== */
+        .slide-9 {
+            background: linear-gradient(to right, #0091DA 0%, #00A8E8 100%);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 80px;
+        }
+
+        .slide-9 h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            width: 100%;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: bold;
+        }
+
+        .organizers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .organizer-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-height: 200px;
+        }
+
+        .organizer-logo {
+            height: clamp(80px, 12vw, 120px);
+            width: auto;
+            object-fit: contain;
+            /* filter: brightness(0) invert(1); */  ← Закомментировано
+        }
+
+        .organizer-box h3 {
+            font-size: clamp(18px, 2.2vw, 24px);
+            margin: 0;
+            font-weight: bold;
+            color: white;
+        }
+
+        .organizer-box p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            opacity: 0.9;
+            margin: 0;
+            color: white;
+        }
+
+        /* ===== SLIDE 11 ===== */
+        .slide-11 {
+            background: linear-gradient(to right, #0091DA 0%, #00A8E8 100%);
+            color: white;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-11 h1 {
+            font-size: 64px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .slide-11 .tagline {
+            font-size: clamp(28px, 5vw, 36px); /* ← Увеличено с 24px */
+            margin-bottom: 50px;
+        }
+
+        .contact-section h3 {
+            font-size: clamp(28px, 3vw, 32px);
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #FFE5B4; /* ← Новый цвет: светло-бежевый, контрастный */
+        }
+
+        .contact-info {
+            font-size: clamp(18px, 2vw, 20px);
+            margin: 15px 0;
+            line-height: 2;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 2px solid white;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+
+        /* ===== CONTENT STYLES ===== */
+        h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            color: #00A8E8;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: clamp(18px, 2vw, 22px);
+            color: #00A8E8;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .description-box {
+            background: #E0F2FE;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            border-left: 5px solid #00A8E8;
+        }
+
+        .description-box p,
+        .stats-list {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            line-height: 1.8;
+        }
+
+        .stats-list p {
+            margin-bottom: 10px;
+        }
+
+        .stats-list strong {
+            color: #00A8E8;
+            font-size: clamp(18px, 1.8vw, 20px);
+        }
+
+        .instagram-link {
+            margin-top: 30px;
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            font-style: italic;
+        }
+
+        .instagram-link a {
+            color: #00A8E8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .reason-item {
+            margin-bottom: 20px;
+        }
+
+        .reason-item h3 {
+            font-size: clamp(18px, 2vw, 22px);
+            color: #00A8E8;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .reason-item p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            padding-left: 20px;
+        }
+
+        .motto {
+            text-align: center;
+            font-size: clamp(22px, 2.5vw, 28px);
+            color: #00A8E8;
+            font-style: italic;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+        }
+
+        .news-item h3 {
+            font-size: clamp(18px, 2vw, 22px);
+            color: #00A8E8;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .news-item p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            line-height: 1.8;
+        }
+
+        .format-section {
+            margin-bottom: 30px;
+        }
+
+        .format-section h3 {
+            font-size: clamp(22px, 2.5vw, 28px);
+            color: #00A8E8;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .format-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .format-section li {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            padding: 8px 0 8px 20px;
+            position: relative;
+        }
+
+        .format-section li:before {
+            content: "• ";
+            position: absolute;
+            left: 0;
+            color: #00A8E8;
+            font-weight: bold;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .award-box {
+            text-align: center;
+            padding: 20px;
+            background: #E0F2FE;
+            border-radius: 8px;
+            border-top: 4px solid #00A8E8;
+        }
+
+        .award-box h3 {
+            font-size: clamp(18px, 2vw, 22px);
+            color: #00A8E8;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .award-box p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+        }
+
+        .conditions-box {
+            background: #E0F2FE;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #00A8E8;
+            margin-bottom: 25px;
+        }
+
+        .conditions-box p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            line-height: 2;
+        }
+
+        .conditions-box strong {
+            color: #00A8E8;
+            font-size: clamp(18px, 1.8vw, 20px);
+        }
+
+        .pricing-section {
+            margin-top: 25px;
+        }
+
+        .pricing-section h3 {
+            font-size: clamp(22px, 2.5vw, 28px);
+            color: #00A8E8;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .pricing-section p {
+            font-size: clamp(18px, 1.8vw, 20px);
+            color: #0369A1;
+            line-height: 1.8;
+        }
+
+        .pricing-highlight {
+            font-style: italic;
+            margin-top: 15px;
+            font-size: clamp(16px, 1.5vw, 18px);
+        }
+
+        .testimonial {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #E0F2FE;
+            border-left: 5px solid #00A8E8;
+            border-radius: 4px;
+        }
+
+        .testimonial-author {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #00A8E8;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #0369A1;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .slide-10 .slide-content {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-10 h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            color: #00A8E8;
+            font-weight: bold;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* ===== Navigation ===== */
+        .nav-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            background: transparent; /* ← Убрал белый фон */
+            padding: 8px 12px; /* ← Уменьшил отступ */
+            border-radius: 50px;
+            border: 2px solid #00A8E8; /* ← Добавил тоненький контур */
+            box-shadow: none; /* ← Убрал тень */
+        }
+
+        .nav-btn {
+            background: #00A8E8;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #0369A1;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #00A8E8;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            z-index: 1000;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+                overflow: auto;
+            }
+
+            .slide-1 {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slide-1-left {
+                display: none; /* ШТОРА СКРЫВАЕТСЯ */
+                flex: 0 0 30%;
+                min-height: 200px;
+            }
+
+            .slide-1-center {
+                flex: 1;
+                padding: 40px 30px;
+                align-items: center;
+                text-align: center;
+                order: 1; /* Текст первым */
+            }
+
+            .slide-1-right {
+                flex: 0 0 35%;
+                min-height: 250px;
+                order: 2; /* Лого в конце */
+            }
+
+            .slide-1-center h1 {
+                font-size: 36px !important;
+            }
+
+            .slide-1-center .subtitle {
+                font-size: 20px !important;
+            }
+
+            .slide {
+                height: auto;
+                min-height: 100vh;
+                padding: 40px 30px;
+            }
+
+            .slide-container {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slide-with-image {
+                flex-direction: column !important;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slide-content {
+                height: auto;
+                min-height: 50vh;
+                overflow: visible;
+            }
+
+            .slide-image-half {
+                height: 50vh;
+                min-height: 300px;
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 32px !important;
+            }
+
+            .awards-grid,
+            .organizers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                bottom: 15px;
+                padding: 10px 15px;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .slide-counter {
+                top: 15px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            .slide {
+                padding-bottom: 110px !important;
+           }
+  
+          .nav-buttons {
+              bottom: 15px;
+           }
+        }
+
+        @media print {
+            .nav-buttons,
+            .slide-counter {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">11</span>
+    </div>
+
+    <!-- ===== SLIDE 1 ===== -->
+    <div class="slide-container active">
+        <div class="slide slide-1">
+            <div class="slide-1-left">
+                <img src="images/stora.png" alt="Cortina" class="curtain-image">
+            </div>
+
+            <div class="slide-1-center">
+                <h1>Teatre sense Fronteres</h1>
+                <p class="subtitle">Unint el món a través del teatre</p>
+                <div class="festival-info">
+                    <p style="font-style: italic;">Festival Internacional de Teatre Infantil</p>
+                    <p style="margin-top: 15px;">1 de març de 2026</p>
+                    <p>Teatre Municipal de Lloret de Mar, Catalunya</p>
+                </div>
+                <p class="tagline">El vostre grup en un escenari internacional, sense sortir de Catalunya.</p>
+            </div>
+
+            <div class="slide-1-right">
+                <img src="images/logo_theatr.png" alt="Logo Teatro Sin Fronteras" class="logo-circle">
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 2 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-2 slide-with-image text-left">
+            <div class="slide-content">
+                <h2>Sobre el festival</h2>
+                
+                <div class="description-box">
+                    <p>Una celebració internacional del teatre que reuneix nens i adolescents de 6 a 18 anys de diferents països i cultures, aquí a Catalunya.</p>
+                </div>
+                
+                <div class="stats-list">
+                    <p><strong>2025:</strong> Primer festival: 10 grups, 5 idiomes, 400 espectadors, 8 categories.</p>
+                    <p><strong>2026:</strong> Es preveuen 6 països i 8 idiomes, expandint la nostra festa teatral europea.</p>
+                    <p><strong>Valors:</strong> inclusivitat, diversitat lingüística, intercanvi cultural.</p>
+                </div>
+                
+                <div class="instagram-link">
+                    <p>Instagram 👉 <a href="https://www.instagram.com/teatro_sinfronteras_festival" target="_blank">@teatro_sinfronteras_festival</a></p>
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide2.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 3 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-3 slide-with-image text-right">
+            <div class="slide-content">
+                <h2>Per què participar?</h2>
+                
+                <div class="reason-item">
+                    <h3>Experiència internacional:</h3>
+                    <p>un escenari multicultural, públic real, sense barreres lingüístiques, aquí a casa.</p>
+                </div>
+                
+                <div class="reason-item">
+                    <h3>Prestigi per al vostre centre:</h3>
+                    <p>actuar en un festival internacional de prestigi a la vostra terra.</p>
+                </div>
+                
+                <div class="reason-item">
+                    <h3>Intercanvi cultural:</h3>
+                    <p>trobades amb grups de 6 països europeus, des de Catalunya.</p>
+                </div>
+                
+                <div class="reason-item">
+                    <h3>Atmosfera de suport:</h3>
+                    <p>un festival de col·laboració, no de competencia</p>
+                </div>
+                
+                <div class="reason-item">
+                    <h3>Premis:</h3>
+                    <p>estatuetes, diplomes i certificats internacionals.</p>
+                </div>
+                
+                <p class="motto">L'art esborra fronteres</p>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide3.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 4 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-4 slide-with-image text-left">
+            <div class="slide-content">
+                <h2>Novetats en 2026</h2>
+                
+                <div class="news-item">
+                    <h3>Per grups d'edat:</h3>
+                    <p>10:00--14:00 h (6--11 anys) i 16:00--20:00 h (12--18 anys).</p>
+                </div>
+                
+                <div class="news-item">
+                    <h3>Jurat:</h3>
+                    <p>actors professionals, directors, pedagogs i experts teatrals.</p>
+                </div>
+                
+                <div class="news-item">
+                    <h3>Nous premis:</h3>
+                    <p>reconeixements per a diferents gèneres teatrals.</p>
+                </div>
+                
+                <div class="news-item">
+                    <h3>Cobertura mediàtica:</h3>
+                    <p>TV local i premsa de Catalunya.</p>
+                </div>
+                
+                <div class="news-item">
+                    <h3>Entrada gratuïta:</h3>
+                    <p>sala plena de públic per a cada actuació.</p>
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide4.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 5 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-5 slide-with-image text-right">
+            <div class="slide-content">
+                <h2>Format de participació</h2>
+                
+                <div class="format-section">
+                    <h3>L'espectacle</h3>
+                    <ul>
+                        <li>Durada: 10--15 minuts.</li>
+                        <li>Muntatge: fins a 10 minuts.</li>
+                        <li>Descripció de l'obra (breu).</li>
+                        <li>Qualsevol idioma és benvingut.</li>
+                    </ul>
+                </div>
+                
+                <div class="format-section">
+                    <h3>Retroalimentación</h3>
+                    <ul>
+                        <li>Professionals del teatre ofereixen comentaris càlids i recomanacions constructives a cada grup.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide5.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 6 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-6 slide-with-image text-left">
+            <div class="slide-content">
+                <h2>Premis i reconeixement</h2>
+                
+                <div class="awards-grid">
+                    <div class="award-box">
+                        <h3>Per al grup:</h3>
+                        <p>Un Gran premi amb dotació económica + estatueta del festival</p>
+                    </div>
+                    
+                    <div class="award-box">
+                        <h3>Per als participants:</h3>
+                        <p>Diplomas</p>
+                    </div>
+                    
+                    <div class="award-box">
+                        <h3>Addicional:</h3>
+                        <p>Premis especials</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide6.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 7 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-7 slide-with-image text-right">
+            <div class="slide-content">
+                <h2>Condicions i aportació</h2>
+                
+                <div class="conditions-box">
+                    <p><strong>Edat:</strong> 6--18 anys.</p>
+                    <p><strong>Repertori:</strong> sense restriccions.</p>
+                    <p><strong>Participació garantida:</strong> tots els grups que abonen la quota obtenen un espai escènic.</p>
+                </div>
+                
+                <div class="pricing-section">
+                    <h3>Aportació organitzativa:</h3>
+                    <p><strong>45 €</strong> per participant</p>
+                    <p><strong>450 €</strong> per a grups de 10+ participants</p>                    
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide7.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 8 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-8 slide-with-image text-left">
+            <div class="slide-content">
+                <h2>Veus del Festival 2025</h2>
+                
+                <div class="testimonial">
+                    <p class="testimonial-author">Nikita, participant (13 anys):</p>
+                    <p class="testimonial-text">"L'idioma no importa. A l'escenari tots ens entenem."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-author">Sr. Frederic Guix, Regidor de Cultura:</p>
+                    <p class="testimonial-text">"Valentia i sinceritat. Són els primers passos dels nens en el gran món del teatre."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-author">Adrià Lamelas Martínez, L'alcalde de Lloret de Mar:</p>
+                    <p class="testimonial-text">"És un honor rebre directors i nens de tota Europa aquí a Catalunya. Donem suport a l'art que uneix."</p>
+                </div>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide8.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 9 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-9">
+            <h2>Organitzadors i suport</h2>
+            
+            <div class="organizers-grid">
+                <div class="organizer-box">
+                    <img src="images/Generalitat.png" alt="Generalitat" class="organizer-logo">
+                    <h3>Generalitat de Catalunya</h3>
+                </div>
+                
+                <div class="organizer-box">
+                    <img src="images/Casamiga.png" alt="Casamiga" class="organizer-logo">
+                    <h3>Associació Casamiga</h3>
+                </div>
+                
+                <div class="organizer-box">
+                    <img src="images/Teatro.png" alt="Teatro" class="organizer-logo">
+                    <h3>Teatre Municipal de Lloret de Mar</h3>
+                    <p>escenari oficial del festival</p>
+                </div>
+                
+                <div class="organizer-box">
+                    <img src="images/Ayuntamiento.png" alt="Ayuntamiento" class="organizer-logo">
+                    <h3>Ajuntament de Lloret de Mar</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 10 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-10 slide-with-image text-right">
+            <div class="slide-content">
+                <h2>Encara hi estàs pensant?</h2>
+            </div>
+            <div class="slide-image-half empty" style="background: url('images/slide10.jpg') center/contain no-repeat #E0F2FE;"></div>
+        </div>
+    </div>
+
+    <!-- ===== SLIDE 11 ===== -->
+    <div class="slide-container">
+        <div class="slide slide-11">
+            <h1>Uneix-te!</h1>
+            <p class="tagline">Regala als nens una experiència que recordaran tota la vida, aquí a Catalunya.</p>
+            
+            <div class="contact-section">
+                <h3>Contacta amb nosaltres</h3>
+                
+                <div class="contact-info">
+                    <p style="font-size: clamp(20px, 2.5vw, 28px);"><strong>Associació CASAMIGA</strong></p>
+                </div>
+                
+                <div class="contact-info">
+                    <p>📞 <a href="tel:+34698999033">+34 698 999 033</a> (<a href="https://wa.me/34698999033?text=%C2%A1Hola!%20Me%20interesa%20participar%20en%20el%20Festival%20Internacional%20de%20Teatro%20Infantil%20%22Teatro%20Sin%20Fronteras%22.%20Por%20favor%2C%20env%C3%ADenme%20el%20formulario%20de%20solicitud." target="_blank">WhatsApp</a>, <a href="https://t.me/+34698999033?text=%C2%A1Hola!%20Me%20interesa%20participar%20en%20el%20Festival%20Internacional%20de%20Teatro%20Infantil%20%22Teatro%20Sin%20Fronteras%22.%20Por%20favor%2C%20env%C3%ADenme%20el%20formulario%20de%20solicitud." target="_blank" rel="noopener noreferrer">Telegram</a>)</p>
+                </div>
+                
+                <div class="contact-info">
+                    <p>📧 <a href="mailto:info@casamiga.eu">info@casamiga.eu</a></p>
+                </div>
+                
+                <div class="contact-info">
+                    <p>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      ircle cx="17.5" cy="6.5" r="1.5"></circle>
+                      </svg><a href="https://www.instagram.com/teatro_sinfronteras_festival" target="_blank" rel="noopener noreferrer">@teatro_sinfronteras_festival</a>
+                   </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 11;
+
+        function showSlide(n) {
+            const containers = document.querySelectorAll('.slide-container');
+            
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+            
+            containers.forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            containers[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide;
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+            
+            const activeContainer = containers[currentSlide - 1];
+            if (activeContainer) {
+                activeContainer.scrollTop = 0;
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Touch/Swipe navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50) {
+                nextSlide();
+            }
+            if (touchEndX - touchStartX > 50) {
+                previousSlide();
+            }
+        }
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
